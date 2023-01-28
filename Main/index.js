@@ -1,4 +1,5 @@
 const inquirer = require('inquirer');
+const connection = require('./db/connect');
 const db = require('./db/funcJS');
 require('console.table');
 
@@ -21,18 +22,6 @@ const questions = [
 ];
 
 function init() {
-  //   db.query('SOURCE db/schema.sql;', function (err, results) {
-  //     if (err) throw err;
-  //     console.table(results);
-  //     console.log('Database has been created.');
-  //   });
-
-  //   db.query('SOURCE db/seeds.sql;', function (err, results) {
-  //     if (err) throw err;
-  //     console.table(results);
-  //     console.log('Seeds have been planted in database.');
-  //   });
-
   inquirer.prompt(questions).then((chosenAction) => {
     switch (chosenAction.action) {
       // this works
@@ -78,4 +67,5 @@ function init() {
   });
 }
 
+// setupDatabase();
 init();
