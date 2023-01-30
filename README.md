@@ -25,7 +25,7 @@ In order to run the applicaton, run the following command in the integrated term
 
 Enter the mysql shell and run SOURCE db/(schema.sql & seeds.sql), then run node index.js in the terminal.
 
-![alt text](img)
+![alt text](https://user-images.githubusercontent.com/114950259/215382491-e3d6830a-78db-4044-ba50-d7d492f08f41.png)
 
 ## Contributing
 
