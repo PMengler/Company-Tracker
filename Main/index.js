@@ -1,5 +1,4 @@
 const inquirer = require('inquirer');
-const connection = require('./db/connect');
 const db = require('./db/funcJS');
 require('console.table');
 

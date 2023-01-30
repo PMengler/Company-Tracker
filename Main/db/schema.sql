@@ -4,12 +4,12 @@ CREATE DATABASE company_db;
 USE company_db;
 
 CREATE TABLE departments (
-    department_id INT PRIMARY KEY,
+    department_id INT AUTO_INCREMENT PRIMARY KEY,
     department_name VARCHAR(30)
 );
 
 CREATE TABLE roles (
-    role_id INTEGER PRIMARY KEY,
+    role_id INTEGER AUTO_INCREMENT PRIMARY KEY,
     title VARCHAR(30),
     salary DEC(15),
     department_id INT,
@@ -18,9 +18,8 @@ CREATE TABLE roles (
     ON DELETE SET NULL
 );
 
--- This table might still need some work to have manager id be null if an employee does not have a manager
 CREATE TABLE employees (
-    employee_id INT PRIMARY KEY,
+    employee_id INT AUTO_INCREMENT PRIMARY KEY,
     first_name VARCHAR(30),
     last_name VARCHAR(30),
     role_id INT,

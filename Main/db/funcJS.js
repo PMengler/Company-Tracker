@@ -17,17 +17,14 @@ class DB {
   }
 
   viewEmployees() {
-    return this.connection.execute(
-      'SELECT * FROM employees',
-      function (err, results) {
-        if (err) throw err;
-        console.log('\n');
-        console.table(results);
-      }
-    );
+    this.connection.query('SELECT * FROM employees', function (err, results) {
+      if (err) throw err;
+      console.log('\n');
+      console.table(results);
+    });
   }
 
-  // needs work, promise not working
+  // need to figure out how to continue with the prompts
   addEmployee() {
     inquirer
       .prompt([
@@ -43,49 +40,29 @@ class DB {
         },
         {
           type: 'rawlist',
-          name: 'role',
-          message: "What is the employee's role?",
-          choices: [
-            'CEO',
-            'Manager',
-            'Human Resources',
-            'IT Technician',
-            'Developer',
-          ],
+          name: 'role_id',
+          message: "What is the employee's role ID?",
+          choices: ['1', '2', '3', '4', '5'],
         },
         {
           type: 'rawlist',
-          name: 'department',
-          message: 'To what department does this employee belong?',
-          choices: [
-            'Administration',
-            'Human Resources',
-            'Research and Development',
-            'Information Technology',
-          ],
+          name: 'manager_id',
+          message: 'What is the manager ID of the new employee?',
+          choices: ['10', '11', '12', '13', '14'],
         },
       ])
       .then((answers) => {
-        const employee = new Employee(
-          answers.first_name,
-          answers.last_name,
-          answers.role,
-          answers.department
-        );
-
-        return this.connection.query(
-          `INSERT INTO employees ${employee}`,
-          function (err, results) {
-            if (err) throw err;
-            console.log('\n');
-            console.table(results);
-          }
-        );
+        const sqlString = `INSERT INTO employees (first_name, last_name, role_id, manager_id) VALUES ('${answers.first_name}', '${answers.last_name}', ${answers.role_id}, ${answers.manager_id});`;
+        console.log(sqlString);
+        this.connection.query(sqlString, function (err, results) {
+          if (err) throw err;
+          console.log('\n');
+          console.table(results);
+        });
       });
-    // viewEmployees();
+    return;
   }
 
-  // this needs work
   updateEmployeeRole() {
     inquirer
       .prompt([
@@ -98,18 +75,12 @@ class DB {
           type: 'rawlist',
           name: 'newRole',
           message: "What is the employee's new role?",
-          choices: [
-            'CEO',
-            'Manager',
-            'Human Resources',
-            'IT Technician',
-            'Developer',
-          ],
+          choices: ['1', '2', '3', '4', '5'],
         },
       ])
       .then((answers) => {
-        connection.query(
-          `UPDATE employees SET role = ${answers.newRole} WHERE id = ${answers.employeeId}`,
+        this.connection.query(
+          `UPDATE employees SET role_id = ${answers.newRole} WHERE employee_id = ${answers.employeeId}`,
           function (err, results) {
             if (err) throw err;
             console.log('\n');
@@ -131,7 +102,6 @@ class DB {
     );
   }
 
-  // this needs work
   addRole() {
     inquirer
       .prompt([
@@ -145,10 +115,15 @@ class DB {
           name: 'salary',
           message: 'What is the salary of the role?',
         },
+        {
+          type: 'rawList',
+          name: 'department_id',
+          message: 'What is the department ID of the role?',
+        },
       ])
       .then((answers) => {
-        return this.connection.query(
-          `INSERT INTO roles (${answers.title}, ${answers.salary})`,
+        this.connection.query(
+          `INSERT INTO roles (title, salary, department_id) VALUES ('${answers.title}', ${answers.salary}, ${answers.department_id})`,
           function (err, results) {
             if (err) throw err;
             console.log('\n');
@@ -170,7 +145,6 @@ class DB {
     );
   }
 
-  // this needs work
   addDepartment() {
     inquirer
       .prompt([
@@ -181,8 +155,8 @@ class DB {
         },
       ])
       .then((answers) => {
-        return connection.query(
-          `INSERT INTO departments ${answers.departmentName}`,
+        this.connection.query(
+          `INSERT INTO departments (department_name) VALUES ('${answers.departmentName}')`,
           function (err, results) {
             if (err) throw err;
             console.log('\n');

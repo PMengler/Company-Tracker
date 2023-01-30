@@ -7,7 +7,7 @@ VALUES (001, "Administration"),
 INSERT INTO roles (role_id, title, salary, department_id)
 VALUES (001, "CEO", 250000, 001),
        (002, "Manager", 150000, 001),
-       (003, "Human Resources", 120000, 002),
+       (003, "HR Consultant", 120000, 002),
        (004, "Developer", 90000, 003),
        (005, "IT Technician", 100000, 004);
 
