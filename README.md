@@ -37,9 +37,11 @@ Testing is not applicable on this project. However, typically you would run the 
 
     npm test, however there are no tests pertaining to this project.
 
-## Questions
+## Links
 
 GitHub Repo Url: https://github.com/PMengler/Company-Tracker
+
+Video Walkthrough Link: https://drive.google.com/file/d/1phQZdjmyHdBkcBMOFuUXBvPBc4b5E0Xi/view
 
 ## License
 
